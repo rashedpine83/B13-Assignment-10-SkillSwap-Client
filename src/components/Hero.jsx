@@ -12,7 +12,12 @@ export default async function Hero() {
   const paymentData = await getAllPayments();
   const taskData = await getAllTasks();
 
-  // Dynamic totals
+  // match current user from database
+  const currentUser = userData?.find(
+    (user) =>
+      user.email === session?.email || user.email === session?.user?.email,
+  );
+
   const totalUsers = userData?.length || 0;
 
   const totalTasks = taskData?.length || 0;
@@ -25,7 +30,7 @@ export default async function Hero() {
 
   return (
     <MotionHero
-      user={session?.user}
+      user={currentUser}
       totalUsers={totalUsers}
       totalTasks={totalTasks}
       totalPayment={totalPayment}

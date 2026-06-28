@@ -186,46 +186,78 @@ export default function MotionHero({
             sm:flex-row
             "
           >
-            {user?.role === "freelancer" && (
+            {user?.role?.trim().toLowerCase() === "client" && (
               <motion.div
                 whileHover={{
                   scale: 1.05,
+                  y: -3,
                 }}
                 whileTap={{
-                  scale: 0.95,
+                  scale: 0.96,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
                 }}
               >
                 <Link
                   href="/post-task"
                   className="
-                  group
-                  flex
-                  items-center
-                  gap-2
-                  rounded-2xl
-                  bg-gradient-to-r
-                  from-purple-600
-                  to-cyan-500
-                  px-8
-                  py-4
-                  text-sm
-                  font-semibold
-                  shadow-lg
-                  shadow-purple-500/30
-                  "
+      group
+      relative
+      flex
+      items-center
+      gap-2
+      overflow-hidden
+      rounded-2xl
+      bg-gradient-to-r
+      from-purple-600
+      via-purple-500
+      to-cyan-500
+      px-8
+      py-4
+      text-sm
+      font-semibold
+      text-white
+      shadow-xl
+      shadow-purple-500/30
+      transition-all
+      duration-300
+      hover:shadow-cyan-500/30
+      "
                 >
-                  Post a Task
+                  {/* Hover shine effect */}
+
+                  <span
+                    className="
+        absolute
+        inset-0
+        -translate-x-full
+        bg-gradient-to-r
+        from-transparent
+        via-white/20
+        to-transparent
+        transition-transform
+        duration-700
+        group-hover:translate-x-full
+        "
+                  />
+
+                  <span className="relative z-10">Post a Task</span>
+
                   <ArrowRight
                     size={18}
                     className="
-                    transition-transform
-                    group-hover:translate-x-1
-                    "
+        relative
+        z-10
+        transition-transform
+        duration-300
+        group-hover:translate-x-1
+        "
                   />
                 </Link>
               </motion.div>
             )}
-
             <motion.div
               whileHover={{
                 scale: 1.05,
