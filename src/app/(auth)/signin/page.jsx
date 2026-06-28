@@ -125,8 +125,20 @@ export default function SigninPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 bg-white p-6 rounded-2xl shadow-md">
+    <div className="max-w-7xl mx-auto mt-10 bg-white p-6 rounded-2xl shadow-md">
       {/* LOGO */}
+      <div className="flex-shrink-0  py-4 ">
+        <Link href="/" className="flex items-center gap-3 mx-auto">
+          <div className="leading-none">
+            <Image
+              src="/images/logo1.png"
+              alt="logo"
+              width={100}
+              height={100}
+            />
+          </div>
+        </Link>
+      </div>
       <div className="text-center mb-6">
         <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-500 to-purple-600 bg-clip-text text-transparent">
           Welcome Back
@@ -141,7 +153,7 @@ export default function SigninPage() {
         type="button"
         onClick={handleGoogleSignUp}
         variant="bordered"
-        className="w-full h-12 rounded-xl border border-cyan-100 hover:bg-cyan-50"
+        className="w-full h-12 rounded-xl border border-cyan-100 hover:bg-cyan-50 text-cyan-500 font-semibold flex items-center justify-center"
       >
         <Image
           src="https://www.google.com/favicon.ico"
@@ -161,7 +173,7 @@ export default function SigninPage() {
       </div>
 
       {/* FORM */}
-      <form onSubmit={handleSignin} className="space-y-5">
+      <form onSubmit={handleSignin} className="space-y-5 ">
         {/* EMAIL */}
         <TextField>
           <Label>Email</Label>

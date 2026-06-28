@@ -11,11 +11,11 @@ const AdminPaymentManagement = async () => {
     paymentData?.length > 0 ? Math.round(totalRevenue / paymentData.length) : 0;
 
   return (
-    <div className="min-h-screen bg-slate-50 p-6">
+    <div className="min-h-screen bg-slate-50 p-6 pt-15 lg:pt-6">
       <div className="bg-white rounded-3xl shadow-xl border border-slate-200 p-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-800">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-700 via-pink-500 to-orange-400 bg-clip-text text-transparent">
             Payment Overview
           </h1>
 

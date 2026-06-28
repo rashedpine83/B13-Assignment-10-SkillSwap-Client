@@ -9,7 +9,7 @@ export const getUserByEmail = async (email) => {
 };
 
 export const updateUser = async (email, data) => {
-  const result = serverMutation(`/api/users/${email}`, data, "PATCH");
+  const result = await serverMutation(`/api/users/${email}`, data, "PATCH");
 
   return result;
 };

@@ -16,12 +16,14 @@ import { Eye, EyeSlash, Person, At, ShieldKeyhole } from "@gravity-ui/icons";
 import { authClient, signUp } from "@/lib/auth-client";
 import Image from "next/image";
 import { createUser } from "@/lib/actions/users";
+import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [imageUrl, setImageUrl] = useState("");
+  const router = useRouter();
 
   const [role, setRole] = useState("client");
 
@@ -120,6 +122,7 @@ export default function SignupPage() {
       });
 
       setSuccess("Account created successfully");
+      router.push("/");
     } catch (error) {
       console.log("SIGNUP ERROR:", error);
       setErrors({
@@ -183,7 +186,7 @@ export default function SignupPage() {
   };
   return (
     <div className="w-full flex justify-center">
-      <Card className="w-full max-w-lg p-6 bg-slate-50">
+      <Card className="w-full max-w-md p-6 bg-slate-50">
         {/* LOGO */}
         <div className="flex-shrink-0  py-4">
           <Link href="/" className="flex items-center gap-3 mx-auto">
@@ -399,6 +402,15 @@ export default function SignupPage() {
           >
             Create Account
           </Button>
+          {/* FOOTER */}
+          <div className="text-center text-sm">
+            Already have an account?{" "}
+            <Link href="/signin" className="font-semibold text-cyan-500">
+              <span className="bg-gradient-to-r from-cyan-500 to-purple-500 bg-clip-text text-transparent font-semibold">
+                Sign In
+              </span>
+            </Link>
+          </div>
         </form>
       </Card>
     </div>

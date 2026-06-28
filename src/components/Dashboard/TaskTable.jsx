@@ -32,10 +32,12 @@ const TaskTable = ({ tasks }) => {
   }, [tasks, categoryFilter, statusFilter]);
 
   return (
-    <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-100">
+    <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-100 pt-15 lg:pt-8">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-3xl font-bold">Task Management</h1>
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-700 via-pink-500 to-orange-400 bg-clip-text text-transparent">
+            Task Management
+          </h1>
 
           <p className="text-slate-500 mt-2">
             {filteredTasks.length} total tasks

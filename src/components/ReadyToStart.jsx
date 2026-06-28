@@ -45,7 +45,7 @@ const ReadyToStart = () => {
 
             <div className="mt-10">
               <Link
-                href="/register"
+                href="/signup"
                 className="inline-flex items-center gap-3 rounded-2xl px-8 py-4 text-white font-semibold bg-gradient-to-r from-orange-500 via-purple-600 to-cyan-500 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
               >
                 Create Your Account

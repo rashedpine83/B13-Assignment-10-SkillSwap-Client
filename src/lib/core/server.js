@@ -21,14 +21,14 @@ export const serverMutation = async (path, data, method = "POST") => {
 export const serverFetch = async (path) => {
   const res = await fetch(`${baseUrl}${path}`);
 
-  if (!res.ok) {
-    const error = await res.text();
+  // if (!res.ok) {
+  //   const error = await res.text();
 
-    console.log("Status:", res.status);
-    console.log("Response:", error);
+  //   console.log("Status:", res.status);
+  //   console.log("Response:", error);
 
-    throw new Error(`Fetch failed: ${res.status} ${res.statusText}`);
-  }
+  //   throw new Error(`Fetch failed: ${res.status} ${res.statusText}`);
+  // }
 
   return await res.json();
 };

@@ -121,11 +121,13 @@ export default function AdminChart({ payments, tasks, users }) {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 p-6">
+    <div className="min-h-screen bg-slate-50 p-6 pt-15 lg:pt-8">
       {/* Header */}
 
       <div className="mb-8">
-        <h1 className="text-4xl font-bold">Admin Dashboard</h1>
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-700 via-pink-500 to-orange-400 bg-clip-text text-transparent">
+          Admin Dashboard
+        </h1>
 
         <p className="text-gray-500">Platform overview and management</p>
       </div>

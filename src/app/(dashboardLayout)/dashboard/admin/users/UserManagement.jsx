@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Ban, ShieldCheck } from "lucide-react";
+import { Search } from "lucide-react";
+import UserStatusButton from "./UserStatusButton";
 
 export default function UserManagement({ users }) {
   const [search, setSearch] = useState("");
@@ -9,11 +10,11 @@ export default function UserManagement({ users }) {
 
   const filteredUsers = users.filter((user) => {
     const matchesSearch =
-      user.name?.toLowerCase().includes(search.toLowerCase()) ||
-      user.email?.toLowerCase().includes(search.toLowerCase());
+      user?.name?.toLowerCase().includes(search.toLowerCase()) ||
+      user?.email?.toLowerCase().includes(search.toLowerCase());
 
     const matchesRole =
-      roleFilter === "all" ? true : user.role?.toLowerCase() === roleFilter;
+      roleFilter === "all" ? true : user?.role?.toLowerCase() === roleFilter;
 
     return matchesSearch && matchesRole;
   });
@@ -30,13 +31,15 @@ export default function UserManagement({ users }) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 p-6">
+    <div className="p-6 pt-15 lg:pt-6 ">
       {/* Header */}
 
       <div className="mb-8">
-        <h1 className="text-4xl font-bold">User Management</h1>
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-700 via-pink-500 to-orange-400 bg-clip-text text-transparent pb-3">
+          User Management
+        </h1>
 
-        <p className="text-gray-500 mt-2">{users.length} total users</p>
+        <p className="text-gray-500 mt-2">{filteredUsers.length} total users</p>
       </div>
 
       {/* Search + Filter */}
@@ -58,6 +61,7 @@ export default function UserManagement({ users }) {
             rounded-xl
             bg-white
             border
+            border-slate-200
             outline-none
             focus:ring-2
             focus:ring-purple-500
@@ -73,6 +77,7 @@ export default function UserManagement({ users }) {
           py-3
           rounded-xl
           border
+          border-slate-200
           bg-white
           outline-none
           focus:ring-2
@@ -89,15 +94,16 @@ export default function UserManagement({ users }) {
         </select>
       </div>
 
-      {/* Users Table */}
+      {/* User Table */}
 
       <div
         className="
         bg-white
         rounded-3xl
         shadow-sm
-        overflow-hidden
         border
+        border-slate-200
+        overflow-hidden
         "
       >
         <div className="overflow-x-auto">
@@ -128,10 +134,10 @@ export default function UserManagement({ users }) {
                 <tr
                   key={user._id}
                   className="
-                    border-t
-                    hover:bg-slate-50
-                    transition
-                    "
+                  border-t
+                  hover:bg-slate-50
+                  transition
+                  "
                 >
                   {/* USER */}
 
@@ -139,19 +145,19 @@ export default function UserManagement({ users }) {
                     <div className="flex items-center gap-4">
                       <div
                         className="
-                          h-12
-                          w-12
-                          rounded-full
-                          bg-gradient-to-r
-                          from-purple-500
-                          via-cyan-500
-                          to-orange-500
-                          text-white
-                          flex
-                          items-center
-                          justify-center
-                          font-bold
-                          "
+                        h-12
+                        w-12
+                        rounded-full
+                        bg-gradient-to-r
+                        from-purple-500
+                        via-cyan-500
+                        to-orange-500
+                        text-white
+                        flex
+                        items-center
+                        justify-center
+                        font-bold
+                        "
                       >
                         {getInitials(user.name)}
                       </div>
@@ -169,14 +175,14 @@ export default function UserManagement({ users }) {
                   <td className="p-5">
                     <span
                       className="
-                        px-3
-                        py-1
-                        rounded-full
-                        bg-cyan-100
-                        text-cyan-700
-                        text-xs
-                        font-medium
-                        "
+                      px-3
+                      py-1
+                      rounded-full
+                      bg-cyan-100
+                      text-cyan-700
+                      text-xs
+                      font-medium
+                      "
                     >
                       {user.role}
                     </span>
@@ -185,31 +191,31 @@ export default function UserManagement({ users }) {
                   {/* STATUS */}
 
                   <td className="p-5">
-                    {user.status === "blocked" ? (
+                    {user.status === "Blocked" ? (
                       <span
                         className="
-                          px-3
-                          py-1
-                          rounded-full
-                          bg-red-100
-                          text-red-600
-                          text-xs
-                          font-medium
-                          "
+                        px-3
+                        py-1
+                        rounded-full
+                        bg-red-100
+                        text-red-600
+                        text-xs
+                        font-medium
+                        "
                       >
                         Blocked
                       </span>
                     ) : (
                       <span
                         className="
-                          px-3
-                          py-1
-                          rounded-full
-                          bg-green-100
-                          text-green-600
-                          text-xs
-                          font-medium
-                          "
+                        px-3
+                        py-1
+                        rounded-full
+                        bg-green-100
+                        text-green-600
+                        text-xs
+                        font-medium
+                        "
                       >
                         Active
                       </span>
@@ -230,47 +236,29 @@ export default function UserManagement({ users }) {
 
                   <td className="p-5">
                     <div className="flex justify-end">
-                      {user.status === "blocked" ? (
-                        <button
-                          className="
-                            flex
-                            items-center
-                            gap-2
-                            px-4
-                            py-2
-                            rounded-xl
-                            bg-cyan-100
-                            text-cyan-700
-                            hover:bg-cyan-200
-                            transition
-                            "
-                        >
-                          <ShieldCheck size={16} />
-                          Unblock
-                        </button>
-                      ) : (
-                        <button
-                          className="
-                            flex
-                            items-center
-                            gap-2
-                            px-4
-                            py-2
-                            rounded-xl
-                            bg-orange-100
-                            text-orange-700
-                            hover:bg-orange-200
-                            transition
-                            "
-                        >
-                          <Ban size={16} />
-                          Block
-                        </button>
-                      )}
+                      <UserStatusButton
+                        email={user.email}
+                        status={user.status}
+                      />
                     </div>
                   </td>
                 </tr>
               ))}
+
+              {filteredUsers.length === 0 && (
+                <tr>
+                  <td
+                    colSpan={5}
+                    className="
+                    text-center
+                    py-10
+                    text-gray-500
+                    "
+                  >
+                    No users found
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

@@ -112,7 +112,7 @@ const TopFreelancer = async () => {
 
         <div className="text-center mt-14">
           <Link
-            href="/freelancers"
+            href="/browser-freelancers"
             className="inline-flex items-center gap-2 text-cyan-600 font-semibold hover:text-purple-600 transition"
           >
             View all freelancers
