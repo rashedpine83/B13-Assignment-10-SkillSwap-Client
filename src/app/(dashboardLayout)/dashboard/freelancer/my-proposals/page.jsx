@@ -42,52 +42,80 @@ export default async function MyProposalsPage() {
             </Link>
           </div>
         ) : (
-          <div className="space-y-3">
-            {proposals.map((p) => (
-              <div
-                key={p._id}
-                className="bg-white border rounded-2xl p-4 flex justify-between items-center
-                hover:shadow-md transition"
+          <div className="flex justify-between items-start">
+            {/* Left Content */}
+            <div className="space-y-4">
+              <h3
+                className="
+      text-2xl
+      font-bold
+      bg-gradient-to-r
+      from-cyan-500
+      via-purple-600
+      to-orange-500
+      bg-clip-text
+      text-transparent
+      "
               >
-                {/* LEFT SIDE */}
-                <div>
-                  <h3 className="font-semibold text-2xl text-cyan-500">
-                    {" "}
-                    {p.taskTitle}
-                  </h3>
+                {p.taskTitle}
+              </h3>
 
-                  <p className="text-sm text-gray-500">
-                    Budget: ${p.proposedBudget} • {p.estimatedDays} days
-                  </p>
-
-                  {/* CREATED DATE */}
-                  <p className="text-xs text-gray-400 mt-1">
-                    Created:{" "}
-                    {p.createdAt
-                      ? new Date(p.createdAt).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "short",
-                          day: "numeric",
-                        })
-                      : "N/A"}
-                  </p>
-                </div>
-
-                {/* STATUS */}
+              {/* Budget + Days */}
+              <div className="flex gap-3 flex-wrap">
                 <span
-                  className={`text-xs px-3 py-1 rounded-full font-medium
-    ${
-      p.status === "pending"
-        ? "bg-yellow-100 text-yellow-700"
-        : p.status === "accepted" || p.status === "In Progress"
-          ? "bg-green-100 text-green-700"
-          : "bg-red-100 text-red-700"
-    }`}
+                  className="
+        px-4 py-2
+        rounded-full
+        bg-cyan-50
+        text-cyan-700
+        text-sm
+        font-medium
+        "
                 >
-                  {p.status === "In Progress" ? "Accepted" : p.status}
+                  💰 ${p.proposedBudget}
+                </span>
+
+                <span
+                  className="
+        px-4 py-2
+        rounded-full
+        bg-purple-50
+        text-purple-700
+        text-sm
+        font-medium
+        "
+                >
+                  ⏳ {p.estimatedDays} Days
                 </span>
               </div>
-            ))}
+
+              {/* Date */}
+              <p className="text-sm text-gray-400">
+                Created:{" "}
+                {p.createdAt
+                  ? new Date(p.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })
+                  : "N/A"}
+              </p>
+            </div>
+
+            {/* Status Badge */}
+            <span
+              className={`px-4 py-2 rounded-full text-sm font-semibold shadow-sm
+      ${
+        p.status === "pending"
+          ? "bg-orange-100 text-orange-700"
+          : p.status === "accepted" || p.status === "In Progress"
+            ? "bg-cyan-100 text-cyan-700"
+            : "bg-purple-100 text-purple-700"
+      }
+    `}
+            >
+              {p.status === "In Progress" ? "Accepted" : p.status}
+            </span>
           </div>
         )}
       </div>

@@ -136,12 +136,7 @@ export default function SignupPage({ redirectTo = "/" }) {
   // GOOGLE SIGNUP
   const handleGoogleSignUp = async () => {
     try {
-      localStorage.setItem(
-        "signupData",
-        JSON.stringify({
-          role,
-        }),
-      );
+      localStorage.setItem("signupData", JSON.stringify({}));
 
       await authClient.signIn.social({
         provider: "google",

@@ -164,71 +164,196 @@ export default async function FreelancerOverview() {
         <h2 className="text-lg font-semibold mb-4">Recent Proposals</h2>
 
         {proposals.length === 0 ? (
-          <div className="bg-white border rounded-2xl p-10 text-center">
-            <FiFileText className="mx-auto text-gray-400 mb-3" size={30} />
+          <div
+            className="
+    relative overflow-hidden
+    bg-white
+    border border-purple-100
+    rounded-3xl
+    p-12
+    text-center
+    shadow-lg
+    "
+          >
+            {/* Top Gradient Line */}
+            <div
+              className="
+      absolute top-0 left-0
+      w-full h-2
+      bg-gradient-to-r
+      from-cyan-500
+      via-purple-500
+      to-orange-500
+      "
+            />
 
-            <h3 className="font-semibold">No proposals yet</h3>
+            {/* Icon */}
+            <div
+              className="
+      w-20 h-20 mx-auto mb-5
+      rounded-full
+      flex items-center justify-center
+      bg-gradient-to-r
+      from-cyan-100
+      via-purple-100
+      to-orange-100
+      "
+            >
+              <FiFileText size={35} className="text-purple-600" />
+            </div>
 
-            <p className="text-sm text-gray-500 mt-1">
-              Browse tasks and submit your first proposal
+            <h3 className="font-bold text-2xl text-gray-800">
+              No Proposals Yet
+            </h3>
+
+            <p className="text-gray-500 mt-3">
+              Browse available tasks and submit your first proposal
             </p>
 
             <Link
               href="/browse-tasks"
               className="
-              inline-block mt-4 px-5 py-2
-              rounded-xl text-white
-              bg-gradient-to-r
-              from-cyan-500 to-purple-600"
+      inline-flex
+      items-center
+      gap-2
+      mt-7
+      px-6
+      py-3
+      rounded-2xl
+      text-white
+      font-medium
+      shadow-lg
+      bg-gradient-to-r
+      from-cyan-500
+      via-purple-600
+      to-orange-500
+      hover:scale-105
+      transition
+      duration-300
+      "
             >
-              Browse Tasks
+              Browse Tasks →
             </Link>
           </div>
         ) : (
-          <div className="space-y-3">
+          <div
+            className="
+    grid
+    grid-cols-1
+    lg:grid-cols-2
+    gap-6
+    "
+          >
             {proposals.slice(0, 5).map((p) => (
               <div
                 key={p._id}
                 className="
-                bg-white border rounded-2xl p-4
-                flex justify-between items-center
-                hover:shadow-md transition"
+        group
+        bg-white
+        rounded-3xl
+        p-6
+        border
+        border-gray-100
+        shadow-sm
+        hover:shadow-2xl
+        hover:-translate-y-2
+        transition-all
+        duration-300
+        relative
+        overflow-hidden
+        "
               >
-                <div>
-                  <h3 className="font-semibold text-2xl text-cyan-500">
-                    {p.taskTitle}
-                  </h3>
+                {/* Hover Gradient Overlay */}
+                <div
+                  className="
+          absolute
+          top-0
+          left-0
+          w-1.5
+          h-full
+          bg-gradient-to-b
+          from-cyan-500
+          via-purple-500
+          to-orange-500
+          "
+                />
 
-                  <p className="text-sm text-gray-500">
-                    Budget: ${p.proposedBudget} • {p.estimatedDays} days
-                  </p>
+                <div className="flex justify-between items-start">
+                  {/* Left Content */}
+                  <div className="space-y-4">
+                    <h3
+                      className="
+              text-2xl
+              font-bold
+              bg-gradient-to-r
+              from-cyan-500
+              via-purple-600
+              to-orange-500
+              bg-clip-text
+              text-transparent
+              "
+                    >
+                      {p.taskTitle}
+                    </h3>
 
-                  <p className="text-xs text-gray-400 mt-1">
-                    Created:{" "}
-                    {p.createdAt
-                      ? new Date(p.createdAt).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "short",
-                          day: "numeric",
-                        })
-                      : "N/A"}
-                  </p>
+                    {/* Budget + Days */}
+                    <div className="flex gap-3 flex-wrap">
+                      <span
+                        className="
+                px-4 py-2
+                rounded-full
+                bg-cyan-50
+                text-cyan-700
+                text-sm
+                font-medium
+                "
+                      >
+                        💰 ${p.proposedBudget}
+                      </span>
+
+                      <span
+                        className="
+                px-4 py-2
+                rounded-full
+                bg-purple-50
+                text-purple-700
+                text-sm
+                font-medium
+                "
+                      >
+                        ⏳ {p.estimatedDays} Days
+                      </span>
+                    </div>
+
+                    {/* Date */}
+                    <p className="text-sm text-gray-400">
+                      Created:{" "}
+                      {p.createdAt
+                        ? new Date(p.createdAt).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          })
+                        : "N/A"}
+                    </p>
+                  </div>
+
+                  {/* Status Badge */}
+                  <span
+                    className={`px-4 py-2 rounded-full text-sm font-semibold shadow-sm
+
+            ${
+              p.status === "pending"
+                ? "bg-orange-100 text-orange-700"
+                : p.status === "accepted" || p.status === "In Progress"
+                  ? "bg-cyan-100 text-cyan-700"
+                  : "bg-purple-100 text-purple-700"
+            }
+            `}
+                  >
+                    {p.status === "In Progress" ? "Accepted" : p.status}
+                  </span>
                 </div>
-
-                <span
-                  className={`text-xs px-3 py-1 rounded-full font-medium
-
-                  ${
-                    p.status === "pending"
-                      ? "bg-yellow-100 text-yellow-700"
-                      : p.status === "accepted" || p.status === "In Progress"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-red-100 text-red-700"
-                  }
-                  `}
-                >
-                  {p.status === "In Progress" ? "Accepted" : p.status}
-                </span>
               </div>
             ))}
           </div>
