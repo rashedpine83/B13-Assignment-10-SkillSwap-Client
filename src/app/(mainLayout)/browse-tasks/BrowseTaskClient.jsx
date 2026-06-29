@@ -11,10 +11,20 @@ import {
   FiBriefcase,
   FiClock,
 } from "react-icons/fi";
+import { Pagination, Table } from "@heroui/react";
+import Link from "next/link";
 
-export default function BrowseTasksClient({ tasks }) {
+export default function BrowseTasksClient({ tasksData }) {
+  const tasks = tasksData?.data;
+  const page = tasksData?.page || 1;
+  const pages = [];
+  const totalPages = tasksData?.totalPages || 1;
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push(i);
+  }
+  console.log(pages);
+
   const router = useRouter();
-
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
 
@@ -364,6 +374,51 @@ export default function BrowseTasksClient({ tasks }) {
           <p className="text-gray-500 mt-2">Try another search or category</p>
         </div>
       )}
+
+      <Table.Footer className="mt-10 flex justify-center">
+        <Pagination size="sm">
+          <Pagination.Content>
+            <Pagination.Item>
+              <Pagination.Previous isDisabled={page === 1}>
+                <Link
+                  className="flex items-center gap-2"
+                  href={`/browse-tasks?page=${page - 1}`}
+                  passHref
+                >
+                  <Pagination.PreviousIcon />
+                  Prev
+                </Link>
+              </Pagination.Previous>
+            </Pagination.Item>
+            {pages.map((p) => (
+              <Pagination.Item key={p}>
+                <Link href={`/browse-tasks?page=${p}`} passHref>
+                  <Pagination.Link
+                    className={
+                      p === page ? "bg-orange-500 text-white" : "text-gray-700"
+                    }
+                    isActive={p === page}
+                  >
+                    {p}
+                  </Pagination.Link>
+                </Link>
+              </Pagination.Item>
+            ))}
+            <Pagination.Item>
+              <Pagination.Next isDisabled={page === totalPages}>
+                <Link
+                  className="flex items-center gap-2"
+                  href={`/browse-tasks?page=${page + 1}`}
+                  passHref
+                >
+                  Next
+                  <Pagination.NextIcon />
+                </Link>
+              </Pagination.Next>
+            </Pagination.Item>
+          </Pagination.Content>
+        </Pagination>
+      </Table.Footer>
     </div>
   );
 }

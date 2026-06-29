@@ -10,6 +10,7 @@ export const getClientTasks = async (emailId, status = "open") => {
   return res.json();
 };
 export const getAllTasks = async (page) => {
+  console.log("getAllTasks page", page);
   return serverFetch(`/api/tasks?page=${page}`);
 };
 

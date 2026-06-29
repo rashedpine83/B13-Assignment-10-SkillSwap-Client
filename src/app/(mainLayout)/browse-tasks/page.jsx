@@ -9,7 +9,7 @@ const BrowseTaskspage = async ({ searchParams }) => {
 
   const tasks = await getAllTasks(params.page);
 
-  return <BrowseTasksClient tasks={tasks} />;
+  return <BrowseTasksClient tasksData={tasks} />;
 };
 
 export default BrowseTaskspage;
