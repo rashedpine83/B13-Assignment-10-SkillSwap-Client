@@ -17,8 +17,15 @@ export const getTaskById = async (taskId) => {
   return serverFetch(`/api/tasks/${taskId}`, {});
 };
 
+// export const getTask = async (query = "") => {
+//   return serverFetch(`/api/tasks${query ? `?${query}` : ""}`);
+// };
+
 export const getTask = async (query = "") => {
-  return serverFetch(`/api/tasks${query ? `?${query}` : ""}`);
+  const result = await serverFetch(`/api/tasks${query ? `?${query}` : ""}`);
+
+  // Support different API structures
+  return Array.isArray(result) ? result : result?.tasks || result?.data || [];
 };
 
 export const getSingleTask = async (id) => {

@@ -1,4 +1,4 @@
-// app/admin/users/page.jsx
+
 
 import { getAllUsers } from "@/lib/api/users";
 import UserManagement from "./UserManagement";

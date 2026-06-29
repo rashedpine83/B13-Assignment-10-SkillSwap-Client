@@ -10,11 +10,21 @@ import {
 import { getSingleTask } from "@/lib/api/tasks";
 import { getUserSession } from "@/lib/core/session";
 import ProposalForm from "./ProposalForm";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 const TaskDetailsPage = async ({ params }) => {
   const { id } = await params;
+  const token = await auth.api.getToken({
+    headers: await headers(),
+  });
+  console.log("token", token);
 
-  const task = await getSingleTask(id);
+  const task = await getSingleTask(id, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
   const user = await getUserSession();
 
   const isLoggedIn = !!user;

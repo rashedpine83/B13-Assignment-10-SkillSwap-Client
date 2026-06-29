@@ -7,6 +7,7 @@ import { Button } from "@heroui/react";
 import { Menu, X } from "lucide-react";
 import { signOut, useSession } from "@/lib/auth-client";
 import { usePathname } from "next/navigation";
+import ThemeSwitch from "./ThemeSwitch";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -234,6 +235,7 @@ export default function Navbar() {
                 </Link>
               </>
             )}
+            <ThemeSwitch />
           </div>
 
           {/* MOBILE BUTTON */}

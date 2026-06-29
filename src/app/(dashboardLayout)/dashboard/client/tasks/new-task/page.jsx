@@ -1,7 +1,7 @@
 "use client";
 
 import { createTask } from "@/lib/actions/tasks";
-import { useSession } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -23,7 +23,6 @@ export default function CreateTaskPage() {
     return <div>Loading...</div>;
   }
   const user = session?.user;
-  console.log(user);
 
   const handleChange = (e) => {
     setForm({
@@ -38,8 +37,14 @@ export default function CreateTaskPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const { data: tokenData } = await authClient.token();
+
     try {
-      const res = await createTask(form);
+      const res = await createTask(form, {
+        headers: {
+          Authorization: `Bearer ${tokenData?.token}`,
+        },
+      });
 
       if (res.insertedId) {
         toast.success("Task created successfully");
