@@ -42,80 +42,93 @@ export default async function MyProposalsPage() {
             </Link>
           </div>
         ) : (
-          <div className="flex justify-between items-start">
-            {/* Left Content */}
-            <div className="space-y-4">
-              <h3
+          <div
+            className="
+  grid
+  grid-cols-1
+  lg:grid-cols-2
+  gap-5
+  "
+          >
+            {proposals.map((p) => (
+              <div
+                key={p._id}
                 className="
-      text-2xl
-      font-bold
-      bg-gradient-to-r
-      from-cyan-500
-      via-purple-600
-      to-orange-500
-      bg-clip-text
-      text-transparent
+      bg-white
+      border
+      border-gray-100
+      rounded-2xl
+      p-5
+      flex
+      justify-between
+      items-start
+      hover:shadow-lg
+      hover:border-purple-200
+      transition-all
+      duration-300
       "
               >
-                {p.taskTitle}
-              </h3>
+                {/* LEFT CONTENT */}
+                <div>
+                  {/* Title */}
+                  <h3
+                    className="
+          font-bold
+          text-2xl
+          bg-gradient-to-r
+          from-cyan-500
+          via-purple-600
+          to-orange-500
+          bg-clip-text
+          text-transparent
+          "
+                  >
+                    {p.taskTitle}
+                  </h3>
 
-              {/* Budget + Days */}
-              <div className="flex gap-3 flex-wrap">
-                <span
-                  className="
-        px-4 py-2
-        rounded-full
-        bg-cyan-50
-        text-cyan-700
-        text-sm
-        font-medium
-        "
-                >
-                  💰 ${p.proposedBudget}
-                </span>
+                  {/* Budget + Days */}
+                  <p className="text-sm text-gray-500 mt-2">
+                    Budget:
+                    <span className="font-medium text-cyan-600">
+                      {" "}
+                      ${p.proposedBudget}
+                    </span>
+                    {" • "}
+                    <span className="text-purple-600">
+                      {p.estimatedDays} days
+                    </span>
+                  </p>
 
+                  {/* Created Date */}
+                  <p className="text-xs text-gray-400 mt-2">
+                    Created:{" "}
+                    {p.createdAt
+                      ? new Date(p.createdAt).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })
+                      : "N/A"}
+                  </p>
+                </div>
+
+                {/* STATUS */}
                 <span
-                  className="
-        px-4 py-2
-        rounded-full
-        bg-purple-50
-        text-purple-700
-        text-sm
-        font-medium
-        "
+                  className={`text-xs px-4 py-2 rounded-full font-medium
+
+        ${
+          p.status === "pending"
+            ? "bg-orange-100 text-orange-700"
+            : p.status === "accepted" || p.status === "In Progress"
+              ? "bg-cyan-100 text-cyan-700"
+              : "bg-purple-100 text-purple-700"
+        }
+        `}
                 >
-                  ⏳ {p.estimatedDays} Days
+                  {p.status === "In Progress" ? "Accepted" : p.status}
                 </span>
               </div>
-
-              {/* Date */}
-              <p className="text-sm text-gray-400">
-                Created:{" "}
-                {p.createdAt
-                  ? new Date(p.createdAt).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })
-                  : "N/A"}
-              </p>
-            </div>
-
-            {/* Status Badge */}
-            <span
-              className={`px-4 py-2 rounded-full text-sm font-semibold shadow-sm
-      ${
-        p.status === "pending"
-          ? "bg-orange-100 text-orange-700"
-          : p.status === "accepted" || p.status === "In Progress"
-            ? "bg-cyan-100 text-cyan-700"
-            : "bg-purple-100 text-purple-700"
-      }
-    `}
-            >
-              {p.status === "In Progress" ? "Accepted" : p.status}
-            </span>
+            ))}
           </div>
         )}
       </div>
