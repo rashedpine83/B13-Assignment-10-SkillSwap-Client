@@ -9,8 +9,8 @@ export const getClientTasks = async (emailId, status = "open") => {
 
   return res.json();
 };
-export const getAllTasks = async () => {
-  return serverFetch("/api/tasks");
+export const getAllTasks = async (page) => {
+  return serverFetch(`/api/tasks?page=${page}`);
 };
 
 export const getTaskById = async (taskId) => {
