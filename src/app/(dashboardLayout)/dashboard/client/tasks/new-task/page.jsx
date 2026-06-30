@@ -46,7 +46,7 @@ export default function CreateTaskPage() {
           Authorization: `Bearer ${tokenData?.token}`,
         },
       });
-
+      console.log(res);
       if (res.insertedId) {
         toast.success("Task created successfully");
 
