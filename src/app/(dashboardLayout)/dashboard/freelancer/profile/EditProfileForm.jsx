@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Card, Input, TextArea, Label, Button } from "@heroui/react";
 import { FiPlus, FiX } from "react-icons/fi";
 import { updateUser } from "@/lib/actions/users";
+import toast from "react-hot-toast";
 
 export default function EditProfileForm({ defaultData }) {
   const router = useRouter();
@@ -74,10 +75,10 @@ export default function EditProfileForm({ defaultData }) {
       });
 
       router.refresh();
-      alert("Profile updated");
+      toast.success("Update successfull");
     } catch (error) {
       console.log(error);
-      alert("Update failed");
+      toast.error("update failed");
     } finally {
       setLoading(false);
     }
@@ -156,7 +157,11 @@ export default function EditProfileForm({ defaultData }) {
             />
           </div>
 
-          <Button type="submit" isDisabled={loading} className="w-full">
+          <Button
+            type="submit"
+            isDisabled={loading}
+            className="w-full bg-cyan-500"
+          >
             {loading ? "Saving..." : "Save Profile"}
           </Button>
         </form>

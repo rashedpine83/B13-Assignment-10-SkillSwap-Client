@@ -9,7 +9,5 @@ export const getPaymentsByEmail = async (email) => {
     `/api/payments/email?email=${encodeURIComponent(email)}`,
   );
 
-  console.log("Payment API Response:", data);
-
   return data;
 };

@@ -5,7 +5,7 @@ export const createUser = async (newUser) => {
 };
 
 export const updateUser = async (email, data) => {
-  const result = await serverMutation(`/api/users/${email}`, data, "PATCH");
+  const result = await serverMutation(`/api/users/${email}`, data, {}, "PATCH");
 
   return result;
 };
