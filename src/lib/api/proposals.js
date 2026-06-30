@@ -4,6 +4,9 @@ import { serverFetch } from "../core/server";
 //   //used limit
 //   return serverFetch("/api/proposals");
 // };
+export const getProposalEmail = async (email) => {
+  return serverFetch(`/api/proposals/freelancer/${email}`);
+};
 
 export const getAllMyProposals = async () => {
   return serverFetch("/api/proposals/my-proposals");

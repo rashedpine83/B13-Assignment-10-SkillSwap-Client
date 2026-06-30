@@ -1,10 +1,19 @@
-import { getProposalsByEmail } from "@/lib/api/proposals";
+import { getProposalEmail } from "@/lib/api/proposals";
+import { getUserSession } from "@/lib/core/session";
+import ProjectCards from "./ProjectCard";
 
 const ActiveProjectFreelancer = async () => {
-  const proposals = await getProposalsByEmail();
+  const user = await getUserSession();
+
+  if (!user?.email) {
+    return <div className="p-8">User not found</div>;
+  }
+
+  const proposals = await getProposalEmail(user.email);
+
   return (
-    <div>
-      <h1>Active Projects</h1>
+    <div className="p-8">
+      <ProjectCards proposals={proposals || []} />
     </div>
   );
 };
