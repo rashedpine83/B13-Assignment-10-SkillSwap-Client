@@ -2,22 +2,17 @@
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-// export const authHeader = async () => {
-//   const token = await getUserToken();
-//   const header = token
-//     ? {
-//         authorization: `Bearer ${token}`,
-//       }
-//     : {};
-//   return header;
-// };
-
-export const serverMutation = async (path, data, method = "POST") => {
+export const serverMutation = async (
+  path,
+  data,
+  options = {},
+  method = "POST",
+) => {
   const res = await fetch(`${baseUrl}${path}`, {
     method,
     headers: {
       "Content-Type": "application/json",
-      // ...await authHeader(),
+      ...options,
     },
     body: data ? JSON.stringify(data) : null,
   });

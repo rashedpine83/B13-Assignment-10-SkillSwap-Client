@@ -7,3 +7,7 @@ export const getAllUsers = async () => {
 export const getUserById = async (id) => {
   return serverFetch(`/api/users/${id}`);
 };
+
+export const getUserByEmail = async (email) => {
+  return await serverFetch(`/api/users/${email}`);
+};
