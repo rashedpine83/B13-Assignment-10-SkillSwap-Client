@@ -7,7 +7,6 @@ import Link from "next/link";
 export default async function BrowseFreelancersPage() {
   const users = await getAllUsers();
   const reviews = await getAllReviews();
-  console.log("reviews:", reviews);
 
   const freelancers =
     users?.filter(
@@ -17,10 +16,8 @@ export default async function BrowseFreelancersPage() {
   return (
     <div className="container mx-auto px-4 py-10">
       {/* Header */}
-      <div className="mb-10 text-center">
-        <h1 className="text-4xl font-bold text-slate-800">
-          Browse Freelancers
-        </h1>
+      <div className="mb-10">
+        <h1 className="text-3xl font-bold">Browse Freelancers</h1>
 
         <p className="text-slate-500 mt-3">
           Find skilled professionals for your tasks
@@ -38,8 +35,8 @@ export default async function BrowseFreelancersPage() {
           const reviewCount =
             reviews?.filter(
               (review) =>
-                review?.freelancerEmail?.toLowerCase() ===
-                user?.email?.toLowerCase(),
+                review?.freelancerEmailId?.trim()?.toLowerCase() ===
+                user?.email?.trim()?.toLowerCase(),
             ).length || 0;
 
           return (
@@ -50,6 +47,7 @@ export default async function BrowseFreelancersPage() {
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-600 via-cyan-500 to-orange-500" />
 
+              {/* Profile Image */}
               <div className="flex justify-center">
                 <div className="w-20 h-20 rounded-full overflow-hidden bg-gradient-to-br from-purple-100 via-cyan-100 to-orange-100 flex items-center justify-center">
                   {user?.image ? (
@@ -68,6 +66,7 @@ export default async function BrowseFreelancersPage() {
                 </div>
               </div>
 
+              {/* User Info */}
               <div className="text-center mt-5">
                 <h3 className="font-bold text-lg">{user.name}</h3>
 
@@ -76,6 +75,7 @@ export default async function BrowseFreelancersPage() {
                 </p>
               </div>
 
+              {/* Skills */}
               <div className="flex flex-wrap justify-center gap-2 mt-5">
                 {user?.skills?.length > 0 ? (
                   user.skills.map((skill, index) => (
@@ -98,6 +98,7 @@ export default async function BrowseFreelancersPage() {
                 )}
               </div>
 
+              {/* Footer */}
               <div className="mt-6 flex items-center justify-between">
                 <div>
                   <p className="text-xs text-slate-400">Hourly Rate</p>

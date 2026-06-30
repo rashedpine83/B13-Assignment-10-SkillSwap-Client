@@ -160,7 +160,7 @@ export default function EditProfileForm({ defaultData }) {
           <Button
             type="submit"
             isDisabled={loading}
-            className="w-full bg-cyan-500"
+            className="w-full bg-orange-500"
           >
             {loading ? "Saving..." : "Save Profile"}
           </Button>

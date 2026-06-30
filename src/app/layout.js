@@ -1,4 +1,4 @@
-
+import NextThemeProvider from "@/lib/Providers/NextThemeProvider";
 import "./globals.css";
 import { Roboto } from "next/font/google";
 import { Toaster } from "react-hot-toast";
@@ -15,11 +15,14 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      data-theme="light"
+      // data-theme="light"
       className={`${roboto.className} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
-        {children}
+      <body className="min-h-full flex flex-col bg-background text-foreground">
+        <NextThemeProvider>
+          <main>{children}</main>
+        </NextThemeProvider>
 
         <Toaster />
       </body>
