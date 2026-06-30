@@ -138,7 +138,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-3">
                   {user?.image ? (
                     <Image
-                      src={user.image}
+                      src={user?.image}
                       alt="user"
                       width={42}
                       height={42}

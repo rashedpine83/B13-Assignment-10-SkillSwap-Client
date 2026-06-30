@@ -22,7 +22,7 @@ export default function SignupPage({ redirectTo = "/" }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const router = useRouter();
 
   const [role, setRole] = useState("client");
@@ -54,11 +54,11 @@ export default function SignupPage({ redirectTo = "/" }) {
     if (!password) {
       newErrors.password = "Password is required";
     } else {
-      if (password.length < 6) {
-        newErrors.password = "Min 6 characters required";
+      if (password.length < 8) {
+        newErrors.password = "Min 8 characters required";
       } else if (!/[A-Z]/.test(password)) {
         newErrors.password = "At least 1 uppercase letter required";
-      } else if (!/[0-7]/.test(password)) {
+      } else if (!/[0-9]/.test(password)) {
         newErrors.password = "At least 1 number required";
       }
     }
@@ -93,6 +93,7 @@ export default function SignupPage({ redirectTo = "/" }) {
         name,
         email,
         password,
+        image: imageUrl,
         role,
         callbackURL: "/",
       };
@@ -296,7 +297,7 @@ export default function SignupPage({ redirectTo = "/" }) {
           </TextField>
 
           {/* IMAGE URL ✅ NEW */}
-          {/* <TextField>
+          <TextField>
             <Label>
               Image URL <span className="text-red-500">*</span>
             </Label>
@@ -311,7 +312,7 @@ export default function SignupPage({ redirectTo = "/" }) {
             {errors.imageUrl && (
               <p className="text-red-500 text-sm">{errors.imageUrl}</p>
             )}
-          </TextField> */}
+          </TextField>
 
           {/* FREELANCER */}
           {role === "freelancer" && (

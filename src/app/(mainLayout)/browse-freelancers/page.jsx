@@ -1,10 +1,12 @@
+import { getReviewsByFreelancerEmail } from "@/lib/api/review";
 import { getAllUsers } from "@/lib/api/users";
 import { Star } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function BrowseFreelancersPage() {
   const users = await getAllUsers();
-  console.log("users", users.length);
+  const reviews = await getReviewsByFreelancerEmail();
 
   // Only freelancer + active users
   const freelancers =
@@ -74,27 +76,35 @@ export default async function BrowseFreelancersPage() {
               "
             />
 
-            {/* Avatar */}
-
             <div className="flex justify-center">
               <div
                 className="
-                w-20
-                h-20
-                rounded-full
-                bg-gradient-to-br
-                from-purple-100
-                via-cyan-100
-                to-orange-100
-                flex
-                items-center
-                justify-center
-                text-2xl
-                font-bold
-                text-cyan-700
-                "
+    w-20
+  h-20
+  rounded-full
+  overflow-hidden
+  bg-gradient-to-br
+  from-purple-100
+  via-cyan-100
+  to-orange-100
+  flex
+  items-center
+  justify-center
+  "
               >
-                {user?.name?.charAt(0).toUpperCase()}
+                {user?.image ? (
+                  <Image
+                    src={user.image}
+                    alt={user?.name}
+                    width={80}
+                    height={80}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-2xl font-bold text-cyan-700">
+                    {user?.name?.charAt(0).toUpperCase()}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -164,7 +174,7 @@ export default async function BrowseFreelancersPage() {
                 <Star size={15} className="text-purple-500 fill-purple-500" />
 
                 <span className="text-sm font-medium text-purple-600">
-                  {user?.skills?.length || 0}
+                  {reviews?.length || 0}
                 </span>
               </div>
             </div>
