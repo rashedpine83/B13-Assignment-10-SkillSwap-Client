@@ -10,7 +10,6 @@ export const getClientTasks = async (emailId, status = "open") => {
   return res.json();
 };
 export const getAllTasks = async (page) => {
-  console.log("getAllTasks page", page);
   return serverFetch(`/api/tasks?page=${page}`);
 };
 
@@ -18,9 +17,9 @@ export const getTaskById = async (taskId) => {
   return serverFetch(`/api/tasks/${taskId}`, {});
 };
 
-// export const getTask = async (query = "") => {
-//   return serverFetch(`/api/tasks${query ? `?${query}` : ""}`);
-// };
+export const getTaskForHero = async () => {
+  return serverFetch(`/api/tasks/allTasks`);
+};
 
 export const getTask = async (query = "") => {
   const result = await serverFetch(`/api/tasks${query ? `?${query}` : ""}`);

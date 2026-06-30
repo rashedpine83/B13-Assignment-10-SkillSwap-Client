@@ -38,6 +38,7 @@ export default function CreateTaskPage() {
     e.preventDefault();
 
     const { data: tokenData } = await authClient.token();
+    console.log(tokenData, form);
 
     try {
       const res = await createTask(form, {

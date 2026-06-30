@@ -22,8 +22,6 @@ export default function BrowseTasksClient({ tasksData }) {
   for (let i = 1; i <= totalPages; i++) {
     pages.push(i);
   }
-  console.log(pages);
-
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");

@@ -1,6 +1,6 @@
 import { getAllUsers } from "@/lib/api/users";
 import { getAllPayments } from "@/lib/api/payment";
-import { getAllTasks } from "@/lib/api/tasks";
+import { getAllTasks, getClientTasks, getTaskForHero } from "@/lib/api/tasks";
 import { getUserSession } from "@/lib/core/session";
 
 import MotionHero from "./MotionHero";
@@ -10,7 +10,9 @@ export default async function Hero() {
 
   const userData = await getAllUsers();
   const paymentData = await getAllPayments();
-  const taskData = await getAllTasks();
+  // const taskData = await getAllTasks();
+  const taskData = await getTaskForHero();
+  console.log("taskData", taskData);
 
   // match current user from database
   const currentUser = userData?.find(
