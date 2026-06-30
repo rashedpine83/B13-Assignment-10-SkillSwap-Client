@@ -15,8 +15,9 @@ import {
 } from "react-icons/fi";
 
 import { FaStar } from "react-icons/fa";
+import { createReview } from "@/lib/actions/review";
 
-export default function TaskCard({ task }) {
+export default function TaskCard({ task, proposals }) {
   const router = useRouter();
 
   const [showEdit, setShowEdit] = useState(false);
@@ -104,12 +105,21 @@ export default function TaskCard({ task }) {
     }
 
     try {
+      const proposal = proposals[0];
+
+      console.log("proposal", proposals);
+
       const review = {
+        user: task.emailId,
+        clientEmailId: proposal?.clientEmailId,
+        freelancerEmailId: proposal?.freelancerEmailId,
+        taskTitle: task.title,
         rating,
         comment,
         reviewed: true,
-        user: "client000@client.com",
       };
+      console.log("review", review);
+      await createReview(review);
 
       await updateTask(task._id, {
         review,
@@ -125,7 +135,10 @@ export default function TaskCard({ task }) {
 
       router.refresh();
     } catch (error) {
-      toast.error("Review failed");
+      console.log("FULL ERROR:", error);
+      console.log("MESSAGE:", error?.message);
+
+      toast.error(error?.message || "Review failed");
     }
   };
 

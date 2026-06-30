@@ -99,7 +99,7 @@ export function DashboardSidebar() {
     admin: adminDashboardLinks,
   };
 
-  const navItems = navLinksMap[user?.role || "freelancer"];
+  const navItems = navLinksMap[user?.role || "client"] || clientDashboardLinks;
 
   const SidebarContent = () => (
     <div className="flex flex-col h-full">

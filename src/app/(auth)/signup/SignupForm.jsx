@@ -54,11 +54,11 @@ export default function SignupPage({ redirectTo = "/" }) {
     if (!password) {
       newErrors.password = "Password is required";
     } else {
-      if (password.length < 8) {
-        newErrors.password = "Min 8 characters required";
+      if (password.length < 6) {
+        newErrors.password = "Min 6 characters required";
       } else if (!/[A-Z]/.test(password)) {
         newErrors.password = "At least 1 uppercase letter required";
-      } else if (!/[0-9]/.test(password)) {
+      } else if (!/[0-7]/.test(password)) {
         newErrors.password = "At least 1 number required";
       }
     }

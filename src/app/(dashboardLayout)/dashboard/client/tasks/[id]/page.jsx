@@ -12,7 +12,7 @@ const MyTasksDetailsPage = async ({ params }) => {
 
   return (
     <div>
-      <TaskCard task={task} />
+      <TaskCard task={task} proposals={proposals} />
 
       {task?.status !== "In Progress" && task?.status !== "completed" && (
         <ProposalCard2 proposals={proposals ?? []} />
