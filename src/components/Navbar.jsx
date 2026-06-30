@@ -51,8 +51,8 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-">
+    <nav className="sticky top-0 z-50 bg-slate-100 backdrop-blur-xl border-b border-gray-100 p-4 ">
+      <div className="container mx-auto px-4">
         <div className="relative flex h-20 items-center justify-between">
           {/* LOGO */}
           <div className="flex-shrink-0">
@@ -61,8 +61,8 @@ export default function Navbar() {
                 <Image
                   src="/images/logo1.png"
                   alt="logo"
-                  width={200}
-                  height={200}
+                  width={180}
+                  height={180}
                 />
               </div>
             </Link>

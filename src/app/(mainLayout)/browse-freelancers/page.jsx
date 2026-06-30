@@ -1,8 +1,10 @@
 import { getAllUsers } from "@/lib/api/users";
 import { Star } from "lucide-react";
+import Link from "next/link";
 
 export default async function BrowseFreelancersPage() {
   const users = await getAllUsers();
+  console.log("users", users.length);
 
   // Only freelancer + active users
   const freelancers =
@@ -11,7 +13,7 @@ export default async function BrowseFreelancersPage() {
     ) || [];
 
   return (
-    <div className="container mx-auto px-6 py-10">
+    <div className="max-w-7xl mx-auto px-6 py-10">
       {/* Header */}
 
       <div className="mb-10 text-center">
@@ -24,7 +26,7 @@ export default async function BrowseFreelancersPage() {
         </p>
       </div>
 
-      {/* Empty */}
+      {/* Empty state */}
 
       {freelancers.length === 0 && (
         <div className="text-center py-10 text-slate-500">
@@ -36,8 +38,9 @@ export default async function BrowseFreelancersPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
         {freelancers.map((user) => (
-          <div
+          <Link
             key={user._id}
+            href={`/browse-freelancers/${user._id}`}
             className="
             group
             bg-white
@@ -51,9 +54,11 @@ export default async function BrowseFreelancersPage() {
             duration-500
             relative
             overflow-hidden
+            block
+            cursor-pointer
             "
           >
-            {/* Top line */}
+            {/* Top gradient line */}
 
             <div
               className="
@@ -163,7 +168,7 @@ export default async function BrowseFreelancersPage() {
                 </span>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

@@ -38,7 +38,8 @@ const TopFreelancer = async () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
           {topFreelancers?.map((user) => (
-            <div
+            <Link
+              href={`/browse-freelancers/${user._id}`}
               key={user?._id}
               className="group bg-white rounded-3xl border border-slate-200 p-6 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden relative"
             >
@@ -104,7 +105,7 @@ const TopFreelancer = async () => {
                   </span>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 

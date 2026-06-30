@@ -1,5 +1,6 @@
 "use client";
 
+import { createCompleteTask } from "@/lib/actions/completeTask";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import {
@@ -52,9 +53,31 @@ export default function ProjectCards({ proposals }) {
         return project;
       });
 
+      // backend payload
+      const completeTaskData = {
+        projectId: selectedProject._id,
+        taskId: selectedProject.taskId,
+        taskTitle: selectedProject.taskTitle,
+        deliverableUrl: url,
+        clientEmailId: selectedProject.clientEmailId,
+        freelancerEmailId: selectedProject.freelancerEmailId,
+        status: "completed",
+        createdAt: new Date(),
+      };
+
+      console.log("Sending to backend:", completeTaskData);
+
+      const result = await createCompleteTask(completeTaskData);
+
+      console.log("Backend response:", result);
+
+      // check backend success
+      if (!result?.insertedId) {
+        throw new Error("Failed to save complete task");
+      }
+
       setProjects(updatedProjects);
 
-      // save completed state
       localStorage.setItem("projects", JSON.stringify(updatedProjects));
 
       setShowModal(false);
@@ -65,11 +88,50 @@ export default function ProjectCards({ proposals }) {
 
       toast.success("Project marked as completed 🎉");
     } catch (error) {
-      toast.error("Something went wrong");
+      console.log("Complete task error:", error);
 
-      console.log(error);
+      toast.error("Something went wrong");
     }
   };
+
+  // const handleSubmit = async () => {
+  //   try {
+  //     const updatedProjects = projects.map((project) => {
+  //       if (project._id === selectedProject._id) {
+  //         return {
+  //           ...project,
+  //           status: "completed",
+  //           deliverableUrl: url,
+  //         };
+  //       }
+
+  //       return project;
+  //     });
+  //     await createCompleteTask({
+  //       projectId: selectedProject._id,
+  //       deliverableUrl: url,
+  //       clientEmailId: selectedProject.clientEmailId,
+  //       freelancerEmailId: selectedProject.freelancerEmailId,
+  //     });
+
+  //     setProjects(updatedProjects);
+
+  //     // save completed state
+  //     localStorage.setItem("projects", JSON.stringify(updatedProjects));
+
+  //     setShowModal(false);
+
+  //     setSelectedProject(null);
+
+  //     setUrl("");
+
+  //     toast.success("Project marked as completed 🎉");
+  //   } catch (error) {
+  //     toast.error("Something went wrong");
+
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div>
