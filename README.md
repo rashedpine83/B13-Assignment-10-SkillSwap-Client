@@ -65,11 +65,18 @@ The goal of SkillSwap is to build a user-friendly platform where people can exch
 - Notifications system
 - Portfolio upload support
 
+
+## 📸 Screenshot
+  ![Home](./public/images/homeskillswap.png)
+
+  
 ## Live Demo
 
 (https://b13-assignment-10-skillswap-client.vercel.app)
 
-## Repository
+## Repository Client
 
 https://github.com/rashedpine83/B13-Assignment-10-SkillSwap-Client
+
+## Repository Server
 https://github.com/rashedpine83/B13-Assignment-10-SkillSwap-server
